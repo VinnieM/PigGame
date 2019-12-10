@@ -1,8 +1,6 @@
 "use strict"
 
-let activePlayer = 0,
-  totalScore = 0,
-  clickOnce = true;
+let activePlayer, totalScore, clickOnce;
 
 initialize();
 
