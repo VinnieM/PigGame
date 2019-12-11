@@ -37,16 +37,13 @@ function initialize() {
  * This function starts a new game.
  */
 document.querySelector('.btn-new')
-  .addEventListener('click', function() {
-    initialize();
-    // alert('New Game has started!');
-  });
+  .addEventListener('click', initialize);
 
 /**
  * This listener is called on click of Roll Dice.
  */
 document.querySelector('.btn-roll')
-  .addEventListener('click', function() {
+  .addEventListener('click', function () {
     // Before rolling, the status of the game is checked.
     if (checkGameStatus()) {
       alert('Please start a new game!!!');
@@ -78,7 +75,7 @@ document.querySelector('.btn-roll')
  * This listener is called when the hold button is pressed.
  */
 document.querySelector('.btn-hold')
-  .addEventListener('click', function() {
+  .addEventListener('click', function () {
     if (clickOnce) {
       let currentPlayerDOM = document.querySelector('#totalScore-' + activePlayer)
       totalScore += parseInt(currentPlayerDOM.textContent);
