@@ -73,6 +73,13 @@ document.querySelector('.btn-roll')
     }
   });
 
+/**
+ * This function sets the score of the player to 0 
+ * if the dice value is 6, two times in a row.
+ * @param {Number} currentDiceValue The current value of the dice
+ * @return 0 is returned the dice value is 6 two times in a row, else the current
+ * dice value is returned.
+ */
 function twoSixesInARow(currentDiceValue) {
   if (currentDiceValue > 5) {
     flag++;
