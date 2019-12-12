@@ -1,6 +1,6 @@
 "use strict"
 
-let activePlayer, totalScore, clickOnce;
+let activePlayer, totalScore, clickOnce, flag;
 
 initialize();
 
@@ -8,6 +8,7 @@ initialize();
  * This function resets all the values.
  */
 function initialize() {
+  flag = 0;
   totalScore = 0;
   activePlayer = 0;
   clickOnce = true;
@@ -54,6 +55,7 @@ document.querySelector('.btn-roll')
       diceDOM.style.display = 'block';
       diceDOM.src = 'images/dice-' + diceValue + '.png';
       if (diceValue > 1) {
+        diceValue = twoSixesInARow(diceValue);
         totalScore += diceValue;
         document.getElementById('currentScore-' + activePlayer)
           .textContent = totalScore
@@ -71,6 +73,26 @@ document.querySelector('.btn-roll')
     }
   });
 
+function twoSixesInARow(currentDiceValue) {
+  if (currentDiceValue > 5) {
+    flag++;
+    if (flag === 2) {
+      flag = 0;
+      totalScore = 0;
+      document.querySelector('#totalScore-' + activePlayer)
+        .textContent = 0;
+      document.querySelector('#currentScore-' + activePlayer)
+        .textContent = 0;
+      alert('You rolled the dice 6, two times in a row, Ouch!!!');
+      document.querySelector('.dice').style.display = 'none';
+      switchPlayer();
+      return 0;
+    }
+  } else {
+    flag = 0;
+  }
+  return currentDiceValue;
+}
 /**
  * This listener is called when the hold button is pressed.
  */
