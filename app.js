@@ -1,6 +1,6 @@
 "use strict"
 
-let activePlayer, totalScore, clickOnce, flag;
+let activePlayer, totalScore, clickOnce, flag, finalScore;
 
 initialize();
 
@@ -122,6 +122,23 @@ document.querySelector('.btn-hold')
   });
 
 /**
+ * This listener is called on Keybord event of Enter.
+ */
+document.querySelector('.final-score')
+  .addEventListener('keyup', function (event) {
+    if (event.keyCode === 13) {
+      finalScore = document.querySelector('.final-score').value;
+      if (finalScore === NaN) {
+        alert('Final Score Should be a number, Final Score set to 50');
+        finalScore = 50;
+      } else if (finalScore.length === 0) {
+        alert('Final Score set to 50 points');
+        finalScore = 50;
+      }
+    }
+  });
+
+/**
  * This function resets the current score of both the players to 0.
  */
 function resetCurrentScore() {
@@ -148,7 +165,7 @@ function switchPlayer() {
  * @return {Boolean} true is returned if game has been completed, else false.
  */
 function checkGameStatus() {
-  if (totalScore >= 50) {
+  if (totalScore >= finalScore) {
     document.querySelector('.player-' + activePlayer + '-panel')
       .classList.remove('active');
     document.querySelector('.player-' + activePlayer + '-panel')
