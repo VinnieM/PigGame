@@ -127,14 +127,7 @@ document.querySelector('.btn-hold')
 document.querySelector('.final-score')
   .addEventListener('keyup', function (event) {
     if (event.keyCode === 13) {
-      finalScore = document.querySelector('.final-score').value;
-      if (finalScore === NaN) {
-        alert('Final Score Should be a number, Final Score set to 50');
-        finalScore = 50;
-      } else if (finalScore.length === 0) {
-        alert('Final Score set to 50 points');
-        finalScore = 50;
-      }
+      getFinalScore();
     }
   });
 
@@ -165,6 +158,9 @@ function switchPlayer() {
  * @return {Boolean} true is returned if game has been completed, else false.
  */
 function checkGameStatus() {
+  if(finalScore === undefined){
+    finalScore = getFinalScore();
+  }
   if (totalScore >= finalScore) {
     document.querySelector('.player-' + activePlayer + '-panel')
       .classList.remove('active');
@@ -176,4 +172,16 @@ function checkGameStatus() {
   } else {
     return false;
   }
+}
+
+function getFinalScore() {
+  finalScore = document.querySelector('.final-score').value;
+  if (finalScore === NaN) {
+    alert('Final Score Should be a number, Final Score set to 50');
+    finalScore = 50;
+  } else if (finalScore.length === 0) {
+    alert('Final Score set to 50 points');
+    finalScore = 50;
+  }
+  return finalScore;
 }
